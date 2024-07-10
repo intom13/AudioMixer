@@ -1,0 +1,46 @@
+{
+    "name": "ScorerController",
+    "maps": [
+        {
+            "name": "ScorerActionMap",
+            "id": "5bac6759-c129-4df1-8b42-87bdc715174a",
+            "actions": [
+                {
+                    "name": "Activating",
+                    "type": "Button",
+                    "id": "27633f13-d783-49ee-8ed2-190e99282ad6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3e286207-2797-4772-9fe2-8c534bbd4ffb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Scorer",
+                    "action": "Activating",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Scorer",
+            "bindingGroup": "Scorer",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
