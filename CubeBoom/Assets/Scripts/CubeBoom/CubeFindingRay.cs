@@ -21,9 +21,9 @@ public class CubeFindingRay : MonoBehaviour
         {
             Transform hittenObject = hit.transform;
 
-            if (hittenObject.TryGetComponent<CubeDivision>(out CubeDivision cubeDivision))
+            if (hittenObject.TryGetComponent(out CubeSeparator cubeSeparator))
             {
-                cubeDivision.CheckDivisionChance();
+                cubeSeparator.CheckDivisionChance();
             }
         }
     }
