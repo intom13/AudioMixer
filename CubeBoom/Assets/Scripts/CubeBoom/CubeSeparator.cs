@@ -7,7 +7,6 @@ public class CubeSeparator : MonoBehaviour
     [SerializeField] private CubeSeparator _cubePrefab;
 
     private CubeDetonator _cubeDetonator;
-    private Transform _transform;
 
     private float _divisionChance = 100;
     private readonly float _reductionCoefficent = 2;
@@ -18,12 +17,11 @@ public class CubeSeparator : MonoBehaviour
     private readonly int _minChance = 0;
     private readonly int _maxChance = 100;
 
-    private List<Rigidbody> _childrenRigidbodys = new List<Rigidbody>();
+    private List<Rigidbody> _childrenRigidbodies = new List<Rigidbody>();
 
     private void Start()
     {
         _cubeDetonator = GetComponent<CubeDetonator>();
-        _transform = GetComponent<Transform>();
     }
 
     public void ChangeDivisionChance(float lastChance)
@@ -36,7 +34,7 @@ public class CubeSeparator : MonoBehaviour
         if (GetRandomChanceNumber() < _divisionChance)
             Division();
         else
-            _cubeDetonator.DestroyCube();
+            _cubeDetonator.BlowUp(_cubeDetonator.GetNearestRigidbodies());
     }
 
     private void Division()
@@ -45,7 +43,7 @@ public class CubeSeparator : MonoBehaviour
 
         for(int i = 0; i < GetRandomNewCubeCount(); i++)
         {
-            newCube = Instantiate(_cubePrefab, _transform.position, Quaternion.identity);
+            newCube = Instantiate(_cubePrefab, transform.position, Quaternion.identity);
 
             if (newCube.TryGetComponent(out CubeScaleChanger cubeScaleChanger))
                 cubeScaleChanger.ChangeScale(transform.localScale);
@@ -53,11 +51,14 @@ public class CubeSeparator : MonoBehaviour
             if (newCube.TryGetComponent(out CubeSeparator cubeSeparator))
                 cubeSeparator.ChangeDivisionChance(_divisionChance);
 
+            if (newCube.TryGetComponent(out CubeDetonator cubeDetonator))
+                cubeDetonator.ChangeExplosionCharacteristics(_cubeDetonator.ExplosionForce, _cubeDetonator.ExplosionRadius);
+
             if (newCube.TryGetComponent(out Rigidbody childRigidbody))
-                _childrenRigidbodys.Add(childRigidbody);
+                _childrenRigidbodies.Add(childRigidbody);
         }
 
-        _cubeDetonator.BlowUp(_childrenRigidbodys);
+        _cubeDetonator.BlowUp(_childrenRigidbodies);
     }
 
     private int GetRandomNewCubeCount()

@@ -4,8 +4,8 @@ public class CubeColorChanger : MonoBehaviour
 {
     private Renderer _renderer;
 
-    private float _minColorValue = 0.0f;
-    private float _maxColorValue = 1.0f;
+    private readonly float _minColorValue = 0.0f;
+    private readonly float _maxColorValue = 1.0f;
 
     private void Start()
     {

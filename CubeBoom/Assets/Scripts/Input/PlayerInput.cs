@@ -26,7 +26,6 @@ public class PlayerInput : MonoBehaviour
 
     private void OnClick(InputAction.CallbackContext context)
     {
-        Debug.Log("Click");
         _cubeFindingRay.CreateRay();
     }
 }

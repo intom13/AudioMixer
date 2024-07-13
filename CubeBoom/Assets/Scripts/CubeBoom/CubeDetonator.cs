@@ -6,26 +6,43 @@ public class CubeDetonator : MonoBehaviour
 {
     [SerializeField] private float _explosionForce;
     [SerializeField] private float _explosionRadius;
-    
-    private Transform _transform;
 
-    private void Start()
-    {
-        _transform = GetComponent<Transform>();
-    }
+    private float _reductionCoefficent = 0.5f;
 
-    public void BlowUp(List<Rigidbody> childrenRigidbodys)
+    public float ExplosionForce => _explosionForce;
+    public float ExplosionRadius => _explosionRadius;
+
+    public void BlowUp(List<Rigidbody> childrenRigidbodies)
     {
-        Debug.Log("Btoom");
-        foreach (var childRigidbody in childrenRigidbodys)
+        foreach (Rigidbody childRigidbody in childrenRigidbodies)
         {
-            childRigidbody.AddExplosionForce(_explosionForce, _transform.position, _explosionRadius);
+            childRigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
         }
 
         DestroyCube();
     }
 
-    public void DestroyCube()
+    public List<Rigidbody> GetNearestRigidbodies()
+    {
+        Collider[] nearestColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
+
+        List<Rigidbody> nearestRigidbodies = new List<Rigidbody>();
+
+        foreach(Collider nearlyCollider in nearestColliders)
+        {
+            if(nearlyCollider.TryGetComponent(out Rigidbody itemRigidbody))
+                nearestRigidbodies.Add(itemRigidbody);
+        }
+        return nearestRigidbodies;
+    }
+
+    public void ChangeExplosionCharacteristics(float lastExplosionForce, float lastExplosionRadius)
+    {
+        _explosionForce = lastExplosionForce / _reductionCoefficent;
+        _explosionRadius = lastExplosionRadius / _reductionCoefficent;
+    }
+
+    private void DestroyCube()
     {
         Destroy(gameObject);
     }
