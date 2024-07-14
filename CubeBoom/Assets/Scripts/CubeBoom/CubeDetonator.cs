@@ -7,7 +7,7 @@ public class CubeDetonator : MonoBehaviour
     [SerializeField] private float _explosionForce;
     [SerializeField] private float _explosionRadius;
 
-    private float _reductionCoefficent = 0.5f;
+    private readonly float _reductionCoefficent = 0.5f;
 
     public float ExplosionForce => _explosionForce;
     public float ExplosionRadius => _explosionRadius;
@@ -33,10 +33,11 @@ public class CubeDetonator : MonoBehaviour
             if(nearlyCollider.TryGetComponent(out Rigidbody itemRigidbody))
                 nearestRigidbodies.Add(itemRigidbody);
         }
+
         return nearestRigidbodies;
     }
 
-    public void ChangeExplosionCharacteristics(float lastExplosionForce, float lastExplosionRadius)
+    public void IncreaseExplosionCharacteristics(float lastExplosionForce, float lastExplosionRadius)
     {
         _explosionForce = lastExplosionForce / _reductionCoefficent;
         _explosionRadius = lastExplosionRadius / _reductionCoefficent;

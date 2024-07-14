@@ -6,7 +6,7 @@ public class CubeFindingRay : MonoBehaviour
 
     private Ray _ray;
 
-    private float _visibleRayDistance = 10f;
+    private readonly float _visibleRayDistance = 10f;
 
     public void CreateRay()
     {
@@ -21,7 +21,7 @@ public class CubeFindingRay : MonoBehaviour
 
             if (hittenObject.TryGetComponent(out CubeSeparator cubeSeparator))
             {
-                cubeSeparator.CheckDivisionChance();
+                cubeSeparator.DivideOrVanish();
             }
         }
     }

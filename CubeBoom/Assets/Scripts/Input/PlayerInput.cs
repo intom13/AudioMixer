@@ -10,17 +10,17 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         _inputController = new InputController();
-
-        _inputController.ScorerActionMap.Activating.performed += OnClick;
     }
 
     private void OnEnable()
     {
         _inputController.Enable();
+        _inputController.ScorerActionMap.Activating.performed += OnClick;
     }
 
     private void OnDisable()
     {
+        _inputController.ScorerActionMap.Activating.performed -= OnClick;
         _inputController.Disable();
     }
 
