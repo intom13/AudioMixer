@@ -364,7 +364,7 @@
 "Assets/Scripts/Input/PlayerInput.cs"
 "Assets/Scripts/SoundScripts/MasterSoundChanger.cs"
 "Assets/Scripts/SoundScripts/OnClickSoundPlayer.cs"
-"Assets/Scripts/SoundScripts/VolumePanel.cs"
+"Assets/Scripts/SoundScripts/VolumeSliderl.cs"
 -langversion:9.0
 
 /deterministic

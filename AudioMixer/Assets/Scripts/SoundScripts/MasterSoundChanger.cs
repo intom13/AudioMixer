@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -9,11 +6,11 @@ public class MasterSoundChanger : MonoBehaviour
     [SerializeField] private AudioMixerGroup _masterVolume;
 
     private readonly float _minVolume = -80;
-    private readonly float _maxVolume = 0;
+    private readonly float _maxVolume = 20;
 
     private readonly string _masterVolumeName = "MasterVolume";
 
-    private bool _isSoundsEnable;
+    private bool _isSoundsEnable = true;
 
     public bool IsSoundsEnable => _isSoundsEnable;
 
