@@ -360,6 +360,8 @@
 "Assets/Scripts/CubeBoom/CubeInitializer.cs"
 "Assets/Scripts/CubeBoom/CubeSeparator.cs"
 "Assets/Scripts/CubeBoom/CubeSpawner.cs"
+"Assets/Scripts/HealthScripts/HealthBehaviour.cs"
+"Assets/Scripts/HealthScripts/HealthDisplayer.cs"
 "Assets/Scripts/Input/InputController.cs"
 "Assets/Scripts/Input/PlayerInput.cs"
 "Assets/Scripts/SoundScripts/MasterSoundChanger.cs"
