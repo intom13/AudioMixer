@@ -1,45 +1,27 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class HealthDisplayer : HealthBehaviour
+public class HealthDisplayer : Health
 {
-    [SerializeField] private Slider _healthBar;
-    [SerializeField] private Slider _smoothHealthBar;
-    [SerializeField] private TMP_Text _textBar;
+    [SerializeField] private TextHealthBar _textHealthBar;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private SmoothHealthBar _smoothHealthBar;
 
-    [SerializeField] private float _smoothSpeed;
-
-    private readonly char _textBarSeparator = '/';
-    private readonly int _maxHealthValue = 100;
-
-    private WaitForSeconds _smoothBarUpdate = new WaitForSeconds(0.01f);
-
-    public void DisplayHealth(int health)
+    private void ActivateDisplayers(int health)
     {
-        StartCoroutine(DisplaySmoothHealthBar(health));
-        DisplayHealthBar(health);
-        DisplayTextHealthBar(health);
+        _textHealthBar.DisplayHealth(health);
+        _smoothHealthBar.DisplayHealth(health);
+        _healthBar.DisplayHealth(health);
     }
 
-    private void DisplayHealthBar(int health)
+    public virtual void DisplayHealth(int health) { }
+    
+    private void OnEnable()
     {
-        _healthBar.value = health;
+        OnHealthChanged += ActivateDisplayers;
     }
 
-    private IEnumerator DisplaySmoothHealthBar(int health)
+    private void OnDisable()
     {
-        while(_smoothHealthBar.value != health)
-        {
-            _smoothHealthBar.value = Mathf.MoveTowards(_smoothHealthBar.value, health, _smoothSpeed * Time.deltaTime);
-
-            yield return _smoothBarUpdate;
-        }
-    }
-
-    private void DisplayTextHealthBar(int health)
-    {
-        _textBar.text = health.ToString() + _textBarSeparator + _maxHealthValue;
+        OnHealthChanged -= ActivateDisplayers;
     }
 }

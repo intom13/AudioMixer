@@ -237,6 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176985267}
   - component: {fileID: 176985268}
+  - component: {fileID: 176985269}
   m_Layer: 5
   m_Name: SmoothHealthBar
   m_TagString: Untagged
@@ -288,8 +289,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -313,10 +314,27 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &176985269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176985266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9815ef310c7d846a6861e33ba6d5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textHealthBar: {fileID: 0}
+  _healthBar: {fileID: 0}
+  _smoothHealthBar: {fileID: 0}
+  _bar: {fileID: 176985268}
+  _smoothSpeed: 18
 --- !u!1 &199204732
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,8 +418,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1992349825}
-        m_TargetAssemblyTypeName: HealthBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1992349824}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: ApplyHeal
         m_Mode: 1
         m_Arguments:
@@ -460,6 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 315694327}
   - component: {fileID: 315694328}
+  - component: {fileID: 315694329}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -536,10 +555,26 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &315694329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315694326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18e30e293d57bd46ba1368d7ab149f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textHealthBar: {fileID: 0}
+  _healthBar: {fileID: 0}
+  _smoothHealthBar: {fileID: 0}
+  _bar: {fileID: 315694328}
 --- !u!1 &449280626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1275,7 +1310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1445,6 +1480,7 @@ GameObject:
   - component: {fileID: 1544120831}
   - component: {fileID: 1544120833}
   - component: {fileID: 1544120832}
+  - component: {fileID: 1544120834}
   m_Layer: 5
   m_Name: TextBar
   m_TagString: Untagged
@@ -1491,7 +1527,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100/100
+  m_text: 50/100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1568,6 +1604,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544120830}
   m_CullTransparentMesh: 1
+--- !u!114 &1544120834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544120830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e46ac505931b4744b257e83c3340087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textHealthBar: {fileID: 0}
+  _healthBar: {fileID: 0}
+  _smoothHealthBar: {fileID: 0}
+  _bar: {fileID: 1544120832}
 --- !u!1 &1545061341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,11 +1898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d3cefffccd09746a80f414bf5e28ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthDisplayer: {fileID: 1992349824}
-  _healthBar: {fileID: 315694328}
-  _smoothHealthBar: {fileID: 176985268}
-  _textBar: {fileID: 1544120832}
-  _smoothSpeed: 20
+  _textHealthBar: {fileID: 1544120834}
+  _healthBar: {fileID: 315694329}
+  _smoothHealthBar: {fileID: 176985269}
 --- !u!114 &1992349825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1863,7 +1913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3c97a3d856b3e44a0ead18a8da8563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthDisplayer: {fileID: 1992349824}
 --- !u!1 &2023588257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,8 +1996,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1992349825}
-        m_TargetAssemblyTypeName: HealthBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1992349824}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: ApplyDamage
         m_Mode: 1
         m_Arguments:
