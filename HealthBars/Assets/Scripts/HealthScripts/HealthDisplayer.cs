@@ -1,27 +1,18 @@
 using UnityEngine;
 
-public class HealthDisplayer : Health
+public class HealthDisplayer : MonoBehaviour
 {
-    [SerializeField] private TextHealthBar _textHealthBar;
-    [SerializeField] private HealthBar _healthBar;
-    [SerializeField] private SmoothHealthBar _smoothHealthBar;
-
-    private void ActivateDisplayers(int health)
-    {
-        _textHealthBar.DisplayHealth(health);
-        _smoothHealthBar.DisplayHealth(health);
-        _healthBar.DisplayHealth(health);
-    }
+    [SerializeField] private Health _health;
 
     public virtual void DisplayHealth(int health) { }
     
     private void OnEnable()
     {
-        OnHealthChanged += ActivateDisplayers;
+        _health.OnHealthChanged += DisplayHealth;
     }
 
     private void OnDisable()
     {
-        OnHealthChanged -= ActivateDisplayers;
+        _health.OnHealthChanged -= DisplayHealth;
     }
 }

@@ -1,8 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private Button _damageButton;
+    [SerializeField] private Button _healButton;
+
     private int _value = 50;
 
     private readonly int _healValue = 20;
@@ -13,7 +17,7 @@ public class Health : MonoBehaviour
 
     public event Action<int> OnHealthChanged;
 
-    public void ApplyDamage()
+    private void ApplyDamage()
     {
         _value -= _damageValue;
 
@@ -23,7 +27,7 @@ public class Health : MonoBehaviour
         OnHealthChanged?.Invoke(_value);
     }
 
-    public void ApplyHeal()
+    private void ApplyHeal()
     {
         _value += _healValue;
 
@@ -31,5 +35,17 @@ public class Health : MonoBehaviour
             _value = _maxValue;
 
         OnHealthChanged?.Invoke(_value);
+    }
+
+    private void OnEnable()
+    {
+        _damageButton.onClick.AddListener(ApplyDamage);
+        _healButton.onClick.AddListener(ApplyHeal);
+    }
+
+    private void OnDisable()
+    {
+        _damageButton.onClick.RemoveListener(ApplyDamage);
+        _healButton.onClick.RemoveListener(ApplyHeal);
     }
 }

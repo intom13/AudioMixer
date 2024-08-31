@@ -7,11 +7,14 @@ public class SmoothHealthBar : HealthDisplayer
     [SerializeField] private Slider _bar;
     [SerializeField] private float _smoothSpeed;
 
-    private WaitForSeconds _smoothBarUpdate = new WaitForSeconds(0.01f);
+    private Coroutine _smoothDisplaying;
 
     public override void DisplayHealth(int health)
     {
-        StartCoroutine(DisplaySmoothHealthBar(health));
+        if(_smoothDisplaying != null)
+            StopCoroutine(_smoothDisplaying);
+        
+        _smoothDisplaying = StartCoroutine(DisplaySmoothHealthBar(health));
     }
 
     private IEnumerator DisplaySmoothHealthBar(int health)
@@ -20,7 +23,7 @@ public class SmoothHealthBar : HealthDisplayer
         {
             _bar.value = Mathf.MoveTowards(_bar.value, health, _smoothSpeed * Time.deltaTime);
 
-            yield return _smoothBarUpdate;
+            yield return null;
         }
     }
 }
