@@ -9,7 +9,7 @@ public class SmoothHealthBar : HealthDisplayer
 
     private Coroutine _smoothDisplaying;
 
-    public override void DisplayHealth(int health)
+    protected override void DisplayHealth(float health)
     {
         if(_smoothDisplaying != null)
             StopCoroutine(_smoothDisplaying);
@@ -17,11 +17,11 @@ public class SmoothHealthBar : HealthDisplayer
         _smoothDisplaying = StartCoroutine(DisplaySmoothHealthBar(health));
     }
 
-    private IEnumerator DisplaySmoothHealthBar(int health)
+    private IEnumerator DisplaySmoothHealthBar(float health)
     {
-        while (_bar.value != health)
+        while (!Mathf.Approximately(_bar.value, health / _health.MaxValue))
         {
-            _bar.value = Mathf.MoveTowards(_bar.value, health, _smoothSpeed * Time.deltaTime);
+            _bar.value = Mathf.MoveTowards(_bar.value, health / _health.MaxValue, _smoothSpeed * Time.deltaTime);
 
             yield return null;
         }

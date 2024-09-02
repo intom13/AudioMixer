@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class HealthDisplayer : MonoBehaviour
 {
-    [SerializeField] private Health _health;
+    [SerializeField] protected Health _health;
 
-    public virtual void DisplayHealth(int health) { }
-    
     private void OnEnable()
     {
         _health.OnHealthChanged += DisplayHealth;
@@ -15,4 +13,6 @@ public class HealthDisplayer : MonoBehaviour
     {
         _health.OnHealthChanged -= DisplayHealth;
     }
+
+    protected virtual void DisplayHealth(float health) { }
 }

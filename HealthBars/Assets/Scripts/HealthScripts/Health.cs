@@ -7,15 +7,29 @@ public class Health : MonoBehaviour
     [SerializeField] private Button _damageButton;
     [SerializeField] private Button _healButton;
 
-    private int _value = 50;
+    private float _value = 100.0f;
 
     private readonly int _healValue = 20;
     private readonly int _damageValue = 20;
 
-    private readonly int _maxValue = 100;
-    private readonly int _minValue = 0;
+    private readonly float _maxValue = 100.0f;
+    private readonly float _minValue = 0.0f;
 
-    public event Action<int> OnHealthChanged;
+    public float MaxValue => _maxValue;
+
+    public event Action<float> OnHealthChanged;
+
+    private void OnEnable()
+    {
+        _damageButton.onClick.AddListener(ApplyDamage);
+        _healButton.onClick.AddListener(ApplyHeal);
+    }
+
+    private void OnDisable()
+    {
+        _damageButton.onClick.RemoveListener(ApplyDamage);
+        _healButton.onClick.RemoveListener(ApplyHeal);
+    }
 
     private void ApplyDamage()
     {
@@ -35,17 +49,5 @@ public class Health : MonoBehaviour
             _value = _maxValue;
 
         OnHealthChanged?.Invoke(_value);
-    }
-
-    private void OnEnable()
-    {
-        _damageButton.onClick.AddListener(ApplyDamage);
-        _healButton.onClick.AddListener(ApplyHeal);
-    }
-
-    private void OnDisable()
-    {
-        _damageButton.onClick.RemoveListener(ApplyDamage);
-        _healButton.onClick.RemoveListener(ApplyHeal);
     }
 }
