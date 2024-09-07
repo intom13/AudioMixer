@@ -5,8 +5,8 @@ public class HealthBar : HealthDisplayer
 {
     [SerializeField] private Slider _bar;
 
-    protected override void DisplayHealth(float health)
+    protected override void Display(float health)
     {
-        _bar.value = health / _health.MaxValue;
+        _bar.value = health / Health.MaxValue;
     }
 }

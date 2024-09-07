@@ -7,8 +7,8 @@ public class TextHealthBar : HealthDisplayer
 
     private readonly char _textBarSeparator = '/';
 
-    protected override void DisplayHealth(float health)
+    protected override void Display(float health)
     {
-        _bar.text = health.ToString() + _textBarSeparator + _health.MaxValue;
+        _bar.text = health.ToString() + _textBarSeparator + Health.MaxValue;
     }
 }

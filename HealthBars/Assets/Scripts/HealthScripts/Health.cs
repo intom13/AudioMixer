@@ -15,9 +15,9 @@ public class Health : MonoBehaviour
     private readonly float _maxValue = 100.0f;
     private readonly float _minValue = 0.0f;
 
-    public float MaxValue => _maxValue;
+    public event Action<float> Changed;
 
-    public event Action<float> OnHealthChanged;
+    public float MaxValue => _maxValue;
 
     private void OnEnable()
     {
@@ -38,7 +38,7 @@ public class Health : MonoBehaviour
         if(_value < _minValue)
             _value = _minValue;
 
-        OnHealthChanged?.Invoke(_value);
+        Changed?.Invoke(_value);
     }
 
     private void ApplyHeal()
@@ -48,6 +48,6 @@ public class Health : MonoBehaviour
         if (_value > _maxValue)
             _value = _maxValue;
 
-        OnHealthChanged?.Invoke(_value);
+        Changed?.Invoke(_value);
     }
 }

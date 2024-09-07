@@ -5,23 +5,23 @@ using UnityEngine.UI;
 public class SmoothHealthBar : HealthDisplayer
 {
     [SerializeField] private Slider _bar;
-    [SerializeField] private float _smoothSpeed;
+    [SerializeField] private float _speed;
 
-    private Coroutine _smoothDisplaying;
+    private Coroutine _displaying;
 
-    protected override void DisplayHealth(float health)
+    protected override void Display(float health)
     {
-        if(_smoothDisplaying != null)
-            StopCoroutine(_smoothDisplaying);
+        if(_displaying != null)
+            StopCoroutine(_displaying);
         
-        _smoothDisplaying = StartCoroutine(DisplaySmoothHealthBar(health));
+        _displaying = StartCoroutine(DisplayBar(health));
     }
 
-    private IEnumerator DisplaySmoothHealthBar(float health)
+    private IEnumerator DisplayBar(float health)
     {
-        while (!Mathf.Approximately(_bar.value, health / _health.MaxValue))
+        while (!Mathf.Approximately(_bar.value, health / Health.MaxValue))
         {
-            _bar.value = Mathf.MoveTowards(_bar.value, health / _health.MaxValue, _smoothSpeed * Time.deltaTime);
+            _bar.value = Mathf.MoveTowards(_bar.value, health / Health.MaxValue, _speed * Time.deltaTime);
 
             yield return null;
         }
